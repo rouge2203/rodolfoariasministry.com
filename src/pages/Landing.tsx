@@ -257,7 +257,7 @@ const Landing: React.FC = () => {
 
         // Add section 5 fade calculation
         const s5FadeStart = windowHeight * 3.2; // Start after section 4
-        const s5FadeDuration = windowHeight * 0.8;
+        const s5FadeDuration = windowHeight * 1.5;
         const s5Fade = Math.min(
           1,
           Math.max(0, (currentScrollY - s5FadeStart) / s5FadeDuration)
@@ -266,7 +266,7 @@ const Landing: React.FC = () => {
 
         // Add section 6 fade calculation
         const s6FadeStart = windowHeight * 4.2; // Start after section 5
-        const s6FadeDuration = windowHeight * 0.8;
+        const s6FadeDuration = windowHeight * 1.5;
         const s6Fade = Math.min(
           1,
           Math.max(0, (currentScrollY - s6FadeStart) / s6FadeDuration)

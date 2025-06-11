@@ -13,11 +13,11 @@ import {
   useSpring,
   useTransform,
 } from "motion/react";
-import { PiLinkSimpleBold } from "react-icons/pi";
 import { FaChevronUp } from "react-icons/fa6";
 import { BsPersonBadge } from "react-icons/bs";
 
 import { useRef, useState } from "react";
+import { MdOutlineEmail } from "react-icons/md";
 
 export const FloatingDock = ({
   items,
@@ -45,54 +45,73 @@ const FloatingDockMobile = ({
 }) => {
   const [open, setOpen] = useState(false);
   return (
-    <div className={cn("fixed top-4 left-4 block md:hidden z-110", className)}>
-      <button
-        onClick={() => setOpen(!open)}
-        className="flex h-12 w-12 items-center shadow-sm mb-3 justify-center rounded-full bg-white/90 gap-4 "
-      >
-        {open ? (
-          <FaChevronUp className="h-5 w-5 text-neutral-500 " />
-        ) : (
-          <BsPersonBadge className="h-5 w-5 text-black " />
-        )}
-      </button>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            layoutId="nav"
-            className="absolute left-0 top-full mt-2 flex flex-col gap-2"
+    <div className="  top-0 left-0 w-full flex items-center justify-between px-4  fixed py-3 z-110">
+      <div className="flex items-center justify-center">
+        <div
+          className={cn(" flex items-center gap-2 xl:hidden z-110", className)}
+        >
+          <button
+            onClick={() => setOpen(!open)}
+            className="flex h-12 w-12 items-center shadow-sm justify-center rounded-full bg-white/75 gap-4 "
           >
-            {items.map((item, idx) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{
-                  opacity: 1,
-                  y: -10,
-                  transition: {
-                    delay: idx * 0.05,
-                  },
-                }}
-                exit={{
-                  opacity: 0,
-                  y: 0,
-                }}
-                transition={{ delay: (items.length - 1 - idx) * 0.05 }}
-              >
-                <a
-                  href={item.href}
+            {open ? (
+              <FaChevronUp className="h-5 w-5 text-neutral-500 " />
+            ) : (
+              <BsPersonBadge className="h-5 w-5 text-black " />
+            )}
+          </button>
+
+          <h1 className="text-base sm:text-lg h-12 px-4 flex items-center bg-white/90 shadow-sm rounded-full font-bold">
+            Rodolfo Arias
+          </h1>
+        </div>
+
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              layoutId="nav"
+              className="absolute left-4 top-full mt-5 flex flex-col gap-2"
+            >
+              {items.map((item, idx) => (
+                <motion.div
                   key={item.title}
-                  className="flex h-12 w-12 shadow-md items-center justify-center rounded-full bg-white/95 "
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{
+                    opacity: 1,
+                    y: -10,
+                    transition: {
+                      delay: idx * 0.05,
+                    },
+                  }}
+                  exit={{
+                    opacity: 0,
+                    y: 0,
+                  }}
+                  transition={{ delay: (items.length - 1 - idx) * 0.05 }}
                 >
-                  <div className=" flex items-center justify-center">
-                    {item.icon}
-                  </div>
-                </a>
-              </motion.div>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
+                  <a
+                    href={item.href}
+                    key={item.title}
+                    className="flex h-12 w-12 shadow-md items-center justify-center rounded-full bg-white/95 "
+                  >
+                    <div className=" flex items-center justify-center">
+                      {item.icon}
+                    </div>
+                  </a>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+      <div className={cn(" flex items-center  rounded-full xl:hidden z-110")}>
+        <button
+          onClick={() => alert("email")}
+          className="flex h-12 w-12 items-center justify-center rounded-full"
+        >
+          <MdOutlineEmail className="h-6 w-6 text-black " />
+        </button>
+      </div>
     </div>
   );
 };
@@ -110,7 +129,7 @@ const FloatingDockDesktop = ({
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn(
-        "mx-auto hidden h-16 items-end gap-4 rounded-2xl bg-gray-50 px-4 pb-3 md:flex ",
+        "mx-auto hidden h-16 items-end gap-4 rounded-2xl bg-gray-50 px-4 pb-3",
         className
       )}
     >

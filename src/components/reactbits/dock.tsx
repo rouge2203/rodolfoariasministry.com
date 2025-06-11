@@ -210,7 +210,7 @@ export default function Dock({
           isHovered.set(0);
           mouseY.set(Infinity);
         }}
-        className={`${className} flex flex-col items-center w-fit gap-3 rounded-2xl border-neutral-700 border-2 py-4 px-2`}
+        className={`${className} flex flex-col items-center w-fit gap-3 rounded-2xl border-neutral-700  py-4 px-2`}
         style={{ width: panelWidth }}
         role="toolbar"
         aria-label="Application dock"
