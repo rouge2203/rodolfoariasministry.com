@@ -6,11 +6,7 @@ import {
   type MutableRefObject,
 } from "react";
 import { mat4, quat, vec2, vec3 } from "gl-matrix";
-import {
-  BiLogoFacebookCircle,
-  BiLogoInstagramAlt,
-  BiPalette,
-} from "react-icons/bi";
+import { BiLogoFacebookCircle, BiPalette } from "react-icons/bi";
 
 // -------- Shader Sources --------
 

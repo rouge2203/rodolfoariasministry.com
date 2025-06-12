@@ -359,6 +359,7 @@ const Folder: React.FC<FolderProps> = ({
     index: number
   ) => {
     setPaperOffsets((prev) => {
+      console.log("...", e);
       const newOffsets = [...prev];
       newOffsets[index] = { x: 0, y: 0 };
       return newOffsets;

@@ -1,5 +1,5 @@
 // src/components/YouTubeCircularGallery.tsx
-import React, { useRef, useState, useEffect, type MouseEvent } from "react";
+import { useRef, useState, useEffect, type MouseEvent } from "react";
 
 interface YouTubeCircularGalleryProps {
   /**
@@ -90,13 +90,13 @@ export default function YouTubeCircularGallery({
    *   - Compute how far the mouse has moved since onMouseDown
    *   - Scroll the container by that delta
    */
-  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    if (!isDragging || !containerRef.current) return;
-    e.preventDefault();
+  // const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+  //   if (!isDragging || !containerRef.current) return;
+  //   e.preventDefault();
 
-    const dx = e.pageX - startX; // how far mouse moved from the start
-    containerRef.current.scrollLeft = scrollLeftStart - dx;
-  };
+  //   const dx = e.pageX - startX; // how far mouse moved from the start
+  //   containerRef.current.scrollLeft = scrollLeftStart - dx;
+  // };
 
   /**
    * onMouseUp / onMouseLeave:
@@ -193,6 +193,7 @@ export default function YouTubeCircularGallery({
       onMouseLeave={handleMouseUpOrLeave}
       // Note: We don’t need onMouseMove here because we delegate it to window during drag
       onWheel={(e) => {
+        e.preventDefault();
         // Optional: we can leave it to the browser’s native smooth scroll.
         // But if you want to “slow it down,” uncomment the code below:
         // e.preventDefault();

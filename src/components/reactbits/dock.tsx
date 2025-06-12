@@ -11,7 +11,7 @@ import React, {
   Children,
   cloneElement,
   useEffect,
-  useMemo,
+  //useMemo,
   useRef,
   useState,
 } from "react";
@@ -177,19 +177,19 @@ export default function Dock({
   magnification = 70,
   distance = 100,
   panelWidth = 64,
-  dockMaxWidth = 256,
+  // dockMaxWidth = 256,
   baseItemSize = 50,
   position = "left",
 }: DockProps) {
   const mouseY = useMotionValue(Infinity);
   const isHovered = useMotionValue(0);
 
-  const maxWidthCalc = useMemo(
-    () => Math.max(dockMaxWidth, magnification + magnification / 2 + 4),
-    [dockMaxWidth, magnification]
-  );
-  const widthRow = useTransform(isHovered, [0, 1], [panelWidth, maxWidthCalc]);
-  const currentWidth = useSpring(widthRow, spring);
+  // const maxWidthCalc = useMemo(
+  //   () => Math.max(dockMaxWidth, magnification + magnification / 2 + 4),
+  //   [dockMaxWidth, magnification]
+  // );
+  // const widthRow = useTransform(isHovered, [0, 1], [panelWidth, maxWidthCalc]);
+  // const currentWidth = useSpring(widthRow, spring);
 
   const dockPositionClasses =
     position === "left"

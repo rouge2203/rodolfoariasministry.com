@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, type MouseEvent } from "react";
+import { useRef, useEffect, useState, type MouseEvent } from "react";
 
 interface CircularGalleryProps {
   /**

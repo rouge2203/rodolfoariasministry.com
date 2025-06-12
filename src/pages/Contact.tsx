@@ -2,12 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Contact: React.FC = () => {
-  const videoEmbeds = [
-    "https://www.youtube.com/embed/hafl3je4T7c",
-    "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    "https://www.youtube.com/embed/5NV6Rdv1a3I",
-    // …etc
-  ];
   const [formData, setFormData] = useState({
     name: "",
     email: "",
