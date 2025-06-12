@@ -1,7 +1,6 @@
 import { cn } from "../../lib/utils";
 import { AnimatePresence, motion } from "motion/react";
 import { FaChevronUp } from "react-icons/fa6";
-import { BsPersonBadge } from "react-icons/bs";
 import { useState } from "react";
 import { PiLinkSimpleBold } from "react-icons/pi";
 
@@ -57,6 +56,8 @@ export const FloatingDockMobileCustom = ({
                     href={item.href}
                     key={item.title}
                     className="flex h-12 w-12 shadow-md items-center justify-center rounded-full bg-white/95"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <div className="flex items-center justify-center">
                       {item.icon}

@@ -49,6 +49,33 @@ const Landing2 = () => {
     "section1" | "section2" | "section3" | "section4" | "section5" | "section6"
   >("section1");
 
+  // Handle URL search params for direct section navigation
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const section = urlParams.get("section");
+    if (
+      section &&
+      [
+        "section1",
+        "section2",
+        "section3",
+        "section4",
+        "section5",
+        "section6",
+      ].includes(section)
+    ) {
+      setActiveTab(section as typeof activeTab);
+      setCurrentMobileSection(section as typeof currentMobileSection);
+
+      // For mobile, scroll to the section
+      if (window.innerWidth < 1280) {
+        setTimeout(() => {
+          scrollToSection(`mobile-${section}`);
+        }, 100);
+      }
+    }
+  }, []);
+
   //Classname for dock items
   const dockItemClassName = `text-black bg-transparent  shadow-lg text-xl hover:text-2xl hover:size-7 border-none cursor-pointer ${
     activeTab === "section2" || activeTab === "section3"
@@ -60,38 +87,50 @@ const Landing2 = () => {
     {
       icon: <BiLogoFacebookCircle />,
       label: "Facebook",
-      onClick: () => window.open("https://facebook.com", "_blank"),
+      onClick: () =>
+        window.open("https://www.facebook.com/RodolfoAriasMinistry", "_blank"),
       className: dockItemClassName,
     },
     {
       icon: <BiLogoInstagramAlt />,
       label: "Instagram",
-      onClick: () => window.open("https://instagram.com", "_blank"),
+      onClick: () =>
+        window.open("https://www.instagram.com/rodolfoarias77/", "_blank"),
       className: dockItemClassName,
     },
 
     {
       icon: <BiLogoTiktok />,
       label: "Tiktok",
-      onClick: () => window.open("https://tiktok.com", "_blank"),
+      onClick: () =>
+        window.open("https://www.tiktok.com/@rodolfoarias77", "_blank"),
       className: dockItemClassName,
     },
     {
       icon: <BiLogoYoutube />,
       label: "Youtube",
-      onClick: () => window.open("https://youtube.com", "_blank"),
+      onClick: () =>
+        window.open("https://www.youtube.com/@RodolfoArias77", "_blank"),
       className: dockItemClassName,
     },
     {
       icon: <BiLogoSpotify />,
       label: "Spotify",
-      onClick: () => window.open("https://spotify.com", "_blank"),
+      onClick: () =>
+        window.open(
+          "https://open.spotify.com/show/4dWEpfB9KDGkQfjsiT8WAH?si=1060c6c6e1944a48",
+          "_blank"
+        ),
       className: dockItemClassName,
     },
     {
       icon: <BiLogoPaypal />,
       label: "Paypal",
-      onClick: () => window.open("https://paypal.com", "_blank"),
+      onClick: () =>
+        window.open(
+          "https://www.paypal.com/paypalme/ofrendayaenlinea?fbclid=PAZXh0bgNhZW0CMTEAAacKsCflfjoHsLt5rb9iRcpe84t49wBdI-F6MKqQhRLbUc9JxC3X_nPe8t8YvA_aem_0pVWiUFaSaYpNcZPnW4Rxw",
+          "_blank"
+        ),
       className: dockItemClassName,
     },
     {
@@ -106,33 +145,33 @@ const Landing2 = () => {
     {
       icon: <BiLogoFacebookCircle className="text-xl" />,
       title: "Facebook",
-      href: "https://facebook.com",
+      href: "https://www.facebook.com/RodolfoAriasMinistry",
     },
     {
       icon: <BiLogoInstagramAlt className="text-xl" />,
       title: "Instagram",
-      href: "https://instagram.com",
+      href: "https://www.instagram.com/rodolfoarias77/",
     },
 
     {
       icon: <BiLogoTiktok className="text-xl" />,
       title: "Tiktok",
-      href: "https://tiktok.com",
+      href: "https://www.tiktok.com/@rodolfoarias77",
     },
     {
       icon: <BiLogoYoutube className="text-xl" />,
       title: "Youtube",
-      href: "https://youtube.com",
+      href: "https://www.youtube.com/@RodolfoArias77",
     },
     {
       icon: <BiLogoSpotify className="text-xl" />,
       title: "Spotify",
-      href: "https://spotify.com",
+      href: "https://open.spotify.com/show/4dWEpfB9KDGkQfjsiT8WAH?si=1060c6c6e1944a48",
     },
     {
       icon: <BiLogoPaypal className="text-xl" />,
       title: "Paypal",
-      href: "https://paypal.com",
+      href: "https://www.paypal.com/paypalme/ofrendayaenlinea?fbclid=PAZXh0bgNhZW0CMTEAAacKsCflfjoHsLt5rb9iRcpe84t49wBdI-F6MKqQhRLbUc9JxC3X_nPe8t8YvA_aem_0pVWiUFaSaYpNcZPnW4Rxw",
     },
     {
       icon: <CustomIcon className="text-xl" />,
@@ -141,13 +180,18 @@ const Landing2 = () => {
     },
   ];
 
-  const videoEmbeds = [
-    "https://www.youtube.com/embed/hafl3je4T7c",
-    "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    "https://www.youtube.com/embed/5NV6Rdv1a3I",
-    "https://www.youtube.com/embed/hafl3je4T7c",
-    "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    "https://www.youtube.com/embed/5NV6Rdv1a3I",
+  const videoEmbeds1 = [
+    "https://www.youtube.com/embed/ePxS7VW1eGc",
+    "https://www.youtube.com/embed/ipym7qWmhck",
+    "https://www.youtube.com/embed/Qvjv53w6Qe4", //CENTER
+
+    // …etc
+  ];
+  const videoEmbeds2 = [
+    "https://www.youtube.com/embed/1yJIxiv_bcM",
+    "https://www.youtube.com/embed/f-5XlB7EusQ",
+    "https://www.youtube.com/embed/J59K9i3vxIU", //CENTER
+
     // …etc
   ];
 
@@ -365,14 +409,14 @@ const Landing2 = () => {
                     Dios te bendiga en tu peor momento
                   </h1>
                   <p className="text-black text-sm tracking-tight font-light mt-4 text-start w-10/12  ">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Quisquam, for example, when you are going through a
-                    difficult time, you can find comfort in the fact that God is
-                    with you.
+                    En los peores momentos, Dios prepara sus mayores victorias.
+                    Como David en el Salmo 34, podemos levantar adoración en
+                    medio de la prueba, sabiendo que lo mejor está por venir.
+                    ¡No te rindas, la promesa sigue en pie!
                   </p>
                   <div className="bg-transparent py-10  rounded-lg flex space-x-4 ">
-                    <Folder size={1} color="#1e202e" items={videoEmbeds} />
-                    <Folder size={1} color="#1e202e" items={videoEmbeds} />
+                    <Folder size={1} color="#1e202e" items={videoEmbeds1} />
+                    <Folder size={1} color="#1e202e" items={videoEmbeds2} />
                   </div>
                 </div>
                 <iframe
@@ -388,7 +432,7 @@ const Landing2 = () => {
           <div
             className={`flex flex-col sm:flex-row   pt-25  w-screen px-2 md:px-0   min-h-screen text-center `}
           >
-            <div className=" z-10 pt-5  w-full ">
+            <div className=" z-10 pt-5 mb-10 w-full ">
               <img
                 src={ImageBoat}
                 alt="Paper Boat"
@@ -396,49 +440,82 @@ const Landing2 = () => {
               />
               <div className="p-10 bg-white/10 backdrop-blur-6xl ring-1 ring-black/5 shadow-xl rounded-lg w-4/6 justify-center items-center mx-auto mt-6">
                 <h1 className="text-black text-center text-3xl md:text-5xl tracking-tight font-bold">
-                  Acerca del Ministerio
+                  Ministerio Rodolfo Arias
                 </h1>
-                <h3 className="text-black text-sm tracking-tight font-light mt-4 text-center  ">
-                  "Neque porro quisquam est qui dolorem ipsum quia dolor sit
-                  amet, consectetur, adipisci velit..."
+                <h3 className="text-black w-8/12 mx-auto text-sm tracking-tight font-light mt-4 text-center  ">
+                  "Confía en el Señor de todo corazón y no te apoyes en tu
+                  propia inteligencia. Reconócelo en todos tus caminos y él
+                  enderezará tus sendas."
                 </h3>
-                <p className="text-black text-sm tracking-tight font-light  mt-4 text-justify w-full md:w-10/12 mx-auto  ">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                  augue nibh, laoreet vel lacus lacinia, faucibus consectetur
-                  libero. In finibus magna eu convallis consectetur. Donec eget
-                  consectetur urna. Etiam feugiat sapien eu ligula blandit
-                  porttitor. In hac habitasse platea dictumst. Maecenas sed diam
-                  et ex sagittis consectetur et sit amet felis. Integer
-                  ultricies, eros a fermentum tristique, libero leo lacinia
-                  justo, eget molestie enim tortor non nulla. Nunc sed interdum
-                  est. Vestibulum ante ipsum primis in faucibus orci luctus et
-                  ultrices posuere cubilia curae; Maecenas erat mauris, tempor
-                  aliquet odio eget, facilisis pharetra ipsum. Morbi mattis
-                  interdum porta. Maecenas semper tincidunt ipsum, id hendrerit
-                  metus semper non. Suspendisse sed justo vitae augue pretium
-                  iaculis. Donec tempus ipsum nec nibh ultrices sagittis.
-                  Vestibulum congue eget velit a pharetra. Duis nec tempor
-                  ipsum, vitae vestibulum enim. Cras sem erat, placerat nec elit
-                  nec, sagittis faucibus tellus. <br /> <br />
-                  Maecenas ac tellus sed risus tristique volutpat. Nulla nec
-                  pellentesque velit. Integer massa nisi, malesuada in tellus
-                  et, rhoncus finibus enim. Nulla eget libero mauris. <br />{" "}
-                  Mauris pellentesque, turpis vel vulputate pulvinar, lorem diam
-                  condimentum ex, vel posuere elit quam a nibh. Mauris commodo
-                  bibendum est nec scelerisque. Praesent dapibus rutrum tortor,
-                  eget molestie lacus lacinia dignissim. Phasellus dignissim
-                  erat id nisi peuam. In magna odio, aliquet et porta non,
-                  ornare a lorem. Nulla tincidunt justo ante, eu vehicula purus
-                  sodales sed. Quisque velit sem, rutrum sit amet velit sed,
-                  pellentesque accumsan tellus.elit.
+                <p className="text-black text-sm tracking-tight font-light mt-4 text-justify w-full md:w-10/12 mx-auto">
+                  Rodolfo Arias es un joven costarricense apasionado por Dios,
+                  convencido de que la verdadera transformación de la vida
+                  comienza cuando el ser humano entrega su corazón completamente
+                  a Cristo. Su fe no es una tradición, es una convicción
+                  profunda: Dios es real, su amor es eterno, y su llamado es
+                  para todos. Rodolfo cree firmemente que Jesús es el camino, la
+                  verdad y la vida, y que sólo en Él hay salvación, restauración
+                  y propósito.
                   <br />
-                  <br /> Curabitur pulvinar dolor ac dolor dictum, sed dapibus
-                  ante dignissim. Nulla aliquet ligula eget porta volutpat.
-                  Curabitur vitae sagittis metus. Phasellus sem arcu, egestas
-                  mattis vulputate sed, fringilla in quam. In magna odio,
-                  aliquet et porta non, ornare a lorem. Nulla tincidunt justo
-                  ante, eu vehicula purus sodales sed. Quisque velit sem, rutrum
-                  sit amet velit sed, pellentesque accumsan tellus.
+                  <br />
+                  Desde temprana edad, su pasión por conocer a Dios lo llevó a
+                  sumergirse en la lectura constante de la Biblia y a
+                  desarrollar una sensibilidad especial para comunicar el
+                  mensaje del Evangelio de forma clara, directa y cercana. Hoy,
+                  a través de los medios digitales, Dios ha abierto puertas
+                  sorprendentes: sus mensajes diarios en TikTok y semanales en
+                  YouTube alcanzan millones de personas, llevando luz y
+                  esperanza a corazones que quizás nunca entrarían a un templo,
+                  pero que desde sus dispositivos reciben palabra de vida.{" "}
+                  <i>"Id, y haced discípulos a todas las naciones"</i> — Mateo
+                  28:19.
+                  <br />
+                  <br />
+                  Además, forma parte del ministerio de <i>Pura Vida FM</i>,
+                  emisora cristiana con más de 8 años al aire en Costa Rica
+                  (106.3 FM), desde donde miles de personas han sido edificadas
+                  a lo largo de los años, tanto en transmisiones como en
+                  eventos, conciertos y campañas de oración que han reunido a
+                  más de 200,000 personas. No se trata solo de una radio, sino
+                  de un movimiento de fe que sigue creciendo.
+                  <br />
+                  <br />
+                  Con el deseo de poner herramientas prácticas en manos de los
+                  creyentes, nace también <i>Gracia Plus</i>, una aplicación
+                  móvil disponible en Apple y Android, donde los usuarios pueden
+                  leer la Biblia, recibir versículos e imágenes diarias,
+                  oraciones, escuchar la radio en vivo e interactuar con
+                  distintos ministerios. Todo con un mismo propósito: que cada
+                  persona tenga acceso a la Palabra y pueda crecer
+                  espiritualmente, porque Rodolfo cree firmemente que la
+                  relación con Dios es personal, diaria y transformadora.
+                  <br />
+                  <br />
+                  Para Rodolfo, el amor es el fundamento del Evangelio. No
+                  importa el trasfondo, la denominación, o la historia personal
+                  de cada uno: Dios nos llama a amar sin condiciones, tal como
+                  Jesús lo hizo.{" "}
+                  <i>
+                    "En esto conocerán todos que sois mis discípulos, si tenéis
+                    amor los unos por los otros"
+                  </i>{" "}
+                  — Juan 13:35.
+                  <br />
+                  <br />
+                  Su llamado es claro: levantar una generación que conozca a
+                  Dios de verdad, no por religión, sino por experiencia;
+                  personas dispuestas a vivir para Cristo y reflejar su gloria.
+                  Porque como declara la Escritura:{" "}
+                  <i>
+                    "Porque yo sé los planes que tengo para vosotros, planes de
+                    bienestar y no de mal, para daros un futuro y una esperanza"
+                  </i>{" "}
+                  — Jeremías 29:11.
+                  <br />
+                  <br />
+                  Este es el corazón de Rodolfo Arias: predicar a Cristo,
+                  levantar discípulos, y llevar esperanza a todo lugar donde
+                  Dios abra una puerta. Y esto, apenas está comenzando.
                 </p>
               </div>
             </div>
@@ -454,7 +531,8 @@ const Landing2 = () => {
                 Galería del Ministerio
               </h1>
               <h3 className="text-black text-sm w-3/4 mx-auto tracking-tight  font-light mt-2 md:mt-4 text-center  ">
-                Observe los mejores momentos del ministerio de Rodolfo Arias
+                Disfrute de los mejores momentos del ministerio en la galería de
+                fotos de Rodolfo Arias.
               </h3>
               <div
                 id="infinite-menu-container"
@@ -489,30 +567,26 @@ const Landing2 = () => {
                     <img
                       src={ImagePuravida}
                       alt="Puravida"
-                      className="w-full rounded-lg opacity-75 h-[40%] object-fill"
+                      className="w-full rounded-lg opacity-90 h-[40%] object-fill"
                     />
                     <div className="flex flex-col  h[40%] p-4 ">
                       <h1 className="text-black text-3xl tracking-tight font-semibold text-start">
-                        Puravida FM
+                        Pura Vida FM
                       </h1>
 
                       <span className="mt-4 text-black text-sm tracking-tight font-thin text-start  flex-1 overflow-y-auto min-h-40 max-h-40">
-                        Loren ipsum dolor sit amet consectetur adipisicing
-                        elit.Loren ipsum dolor sit amet consectetur adipisicing
-                        elit.Loren ipsum dolor sit amet consectetur adipisicing
-                        elit.Loren ipsum dolor sit amet consectetur adipisicing
-                        elit. Loren ipsum dolor sit amet consectetur adipisicing
-                        elit.Lom dolor sit amet consectetng elit. Loren ipsum
-                        dolor sit amet consectetur adipisic
+                        Pura Vida FM 106.3 lleva más de 8 años al aire en Costa
+                        Rica, compartiendo mensajes de fe, esperanza y buena
+                        música para toda la familia. Estamos 24/7 acompañando a
+                        miles de personas, con actividades que reúnen a muchos
+                        en un mismo sentir. Más que una radio, somos una voz de
+                        bendición cada día.
                       </span>
                     </div>
                     <div className="flex justify-end h-[12.5%] items-center   rounded-lg px-2">
                       <button
                         onClick={() =>
-                          window.open(
-                            "https://www.youtube.com/@graciaplus",
-                            "_blank"
-                          )
+                          window.open("https://www.puravidafm.cr", "_blank")
                         }
                         className="rounded-full hover:scale-110 transition-all duration-300 hover:cursor-pointer flex mr-2 items-center justify-center shadow-xl ring ring-black/5 size-12"
                       >
@@ -521,7 +595,7 @@ const Landing2 = () => {
                       <button
                         onClick={() =>
                           window.open(
-                            "https://www.youtube.com/@graciaplus",
+                            "https://www.facebook.com/PuraVida1063",
                             "_blank"
                           )
                         }
@@ -536,28 +610,27 @@ const Landing2 = () => {
                     <img
                       src={ImageTiktok}
                       alt="Puravida"
-                      className="w-ful rounded-lg h-[40%] object-fill opacity-75"
+                      className="w-ful rounded-lg h-[40%] object-fill opacity-85"
                     />
                     <div className="flex flex-col  h[40%] p-4 ">
                       <h1 className="text-black text-3xl tracking-tight font-semibold text-start">
-                        Puravida FM
+                        Contenido Digital
                       </h1>
 
                       <span className="mt-4 text-black text-sm tracking-tight font-thin text-start  flex-1 overflow-y-auto min-h-40 max-h-40">
-                        Loren ipsum dolor sit amet consectetur adipisicing
-                        elit.Loren ipsum dolor sit amet consectetur adipisicing
-                        elit.Loren ipsum dolor sit amet consectetur adipisicing
-                        elit.Loren ipsum dolor sit amet consectetur adipisicing
-                        elit. Loren ipsum dolor sit amet consectetur adipisicing
-                        elit.Lom dolor sit amet consectetng elit. Loren ipsum
-                        dolor sit amet consectetur adipisic
+                        Llevamos el mensaje de fe a cada plataforma. Creamos
+                        TikToks con millones de vistas, podcasts en Spotify,
+                        transmisiones en vivo por Facebook, TikTok y YouTube.
+                        Con videos cortos y mensajes completos buscamos
+                        inspirar, edificar y acercar más personas a Dios cada
+                        día.
                       </span>
                     </div>
                     <div className="flex justify-end h-[12.5%] items-center   rounded-lg px-2">
                       <button
                         onClick={() =>
                           window.open(
-                            "https://www.youtube.com/@graciaplus",
+                            "https://www.youtube.com/@RodolfoArias77",
                             "_blank"
                           )
                         }
@@ -568,7 +641,7 @@ const Landing2 = () => {
                       <button
                         onClick={() =>
                           window.open(
-                            "https://www.youtube.com/@graciaplus",
+                            "https://www.facebook.com/RodolfoAriasMinistry",
                             "_blank"
                           )
                         }
@@ -579,7 +652,7 @@ const Landing2 = () => {
                       <button
                         onClick={() =>
                           window.open(
-                            "https://www.youtube.com/@graciaplus",
+                            "https://www.tiktok.com/@rodolfoarias77",
                             "_blank"
                           )
                         }
@@ -594,7 +667,7 @@ const Landing2 = () => {
                     <img
                       src={ImageGraciaPlus}
                       alt="Puravida"
-                      className="w-full rounded-lg opacity-75 h-[40%] object-fill"
+                      className="w-full rounded-lg opacity-85 h-[40%] object-fill"
                     />
                     <div className="flex flex-col  h[40%] p-4 ">
                       <h1 className="text-black text-3xl tracking-tight font-semibold text-start">
@@ -602,22 +675,19 @@ const Landing2 = () => {
                       </h1>
 
                       <span className="mt-4 text-black text-sm tracking-tight font-thin text-start  flex-1 overflow-y-auto min-h-40 max-h-40">
-                        Loren ipsum dolor sit amet consectetur adipisicing
-                        elit.Loren ipsum dolor sit amet consectetur adipisicing
-                        elit.Loren ipsum dolor sit amet consectetur adipisicing
-                        elit.Loren ipsum dolor sit amet consectetur adipisicing
-                        elit. Loren ipsum dolor sit amet consectetur adipisicing
-                        elit.Lom dolor sit amet consectetng elit. Loren ipsum
-                        dolor sit amet consectetur adipisic
+                        Gracia Plus es una aplicación móvil con miles de
+                        descargas, diseñada para acompañarte cada día. Puedes
+                        leer la Biblia, recibir imágenes y versículos diarios,
+                        interactuar con nuestra radio en vivo y los programas al
+                        aire. Además, encontrarás oraciones diarias que
+                        fortalecen tu fe y te acercan más a Dios. Todo en un
+                        solo lugar, siempre al alcance de tu mano.
                       </span>
                     </div>
                     <div className="flex justify-end h-[12.5%] items-center   rounded-lg px-2">
                       <button
                         onClick={() =>
-                          window.open(
-                            "https://www.youtube.com/@graciaplus",
-                            "_blank"
-                          )
+                          window.open("https://graciaplus.com", "_blank")
                         }
                         className="rounded-full hover:scale-110 transition-all duration-300 hover:cursor-pointer flex mr-2 items-center justify-center shadow-xl ring ring-black/5 size-12"
                       >
@@ -626,7 +696,7 @@ const Landing2 = () => {
                       <button
                         onClick={() =>
                           window.open(
-                            "https://www.youtube.com/@graciaplus",
+                            "https://play.google.com/store/apps/details?id=com.lobster.graciaplus&hl=es_CR",
                             "_blank"
                           )
                         }
@@ -637,7 +707,7 @@ const Landing2 = () => {
                       <button
                         onClick={() =>
                           window.open(
-                            "https://www.youtube.com/@graciaplus",
+                            "https://apps.apple.com/cr/app/gracia-plus/id6742936528?l=es-GB",
                             "_blank"
                           )
                         }
@@ -654,25 +724,6 @@ const Landing2 = () => {
         );
       case "section6":
         return (
-          // <div
-          //   className={`flex flex-col items-center justify-center w-screen min-h-screen text-center `}
-          // >
-          //   <div className="z-10 container mx-auto px-6">
-          //     <h1 className="text-black text-center text-4xl md:text-6xl tracking-tight font-bold">
-          //       Contacto
-          //     </h1>
-          //     <p className="text-black text-lg tracking-tight font-light mt-8 max-w-2xl mx-auto">
-          //       ¿Tienes alguna pregunta o te gustaría ponerte en contacto con
-          //       nosotros? Estaremos encantados de escucharte.
-          //     </p>
-          //     <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
-          //       <button className="bg-black text-white px-8 py-3 rounded-full hover:bg-gray-800 transition-colors">
-          //         <MdOutlineEmail className="inline mr-2" />
-          //         Enviar mensaje
-          //       </button>
-          //     </div>
-          //   </div>
-          // </div>
           <div
             className={`flex flex-col items-center justify-center w-screen min-h-screen text-center `}
           >
@@ -697,15 +748,14 @@ const Landing2 = () => {
                     Donaciones
                   </h1>
                   <span className="text-black text-sm tracking-tight font-light mt-2 text-start  ">
-                    Puedes apoyar nuestro ministerio con una donación. Con tu
-                    apoyo la palabra de de Dios se puede escuchar en todo el
-                    mundo.
+                    Puede apoyar nuestro ministerio a seguir creciendo e
+                    inspirar a muchas más personas a conocer a Dios.
                   </span>
                   <button
                     className="size-10 rounded-full hover:scale-110 transition-all duration-300 hover:cursor-pointer items-center justify-center flex bg-black mt-4 absolute bottom-2 right-2"
                     onClick={() =>
                       window.open(
-                        "https://www.paypal.com/donate/?hosted_button_id=2242222222222222222222222222222222222222",
+                        "https://www.paypal.com/paypalme/ofrendayaenlinea",
                         "_blank"
                       )
                     }
@@ -729,9 +779,8 @@ const Landing2 = () => {
                   <button
                     className="size-10 rounded-full hover:scale-110 transition-all duration-300 hover:cursor-pointer items-center justify-center flex bg-black mt-4 absolute bottom-2 right-2"
                     onClick={() =>
-                      window.open(
-                        "https://www.paypal.com/donate/?hosted_button_id=2242222222222222222222222222222222222222",
-                        "_blank"
+                      alert(
+                        "Puedes escribirnos al correo rodolfoarias77@gmail.com"
                       )
                     }
                   >
@@ -807,21 +856,22 @@ const Landing2 = () => {
                               Dios te bendiga en tu peor momento
                             </h1>
                             <p className="text-black text-sm tracking-tight font-light mt-4 text-start w-10/12  ">
-                              Lorem ipsum dolor sit amet consectetur adipisicing
-                              elit. Quisquam, for example, when you are going
-                              through a difficult time, you can find comfort in
-                              the fact that God is with you.
+                              En los peores momentos, Dios prepara sus mayores
+                              victorias. Como David en el Salmo 34, podemos
+                              levantar adoración en medio de la prueba, sabiendo
+                              que lo mejor está por venir. ¡No te rindas, la
+                              promesa sigue en pie!
                             </p>
                             <div className="bg-transparent py-10  rounded-lg flex space-x-4 ">
                               <Folder
                                 size={1}
                                 color="#1e202e"
-                                items={videoEmbeds}
+                                items={videoEmbeds1}
                               />
                               <Folder
                                 size={1}
                                 color="#1e202e"
-                                items={videoEmbeds}
+                                items={videoEmbeds2}
                               />
                             </div>
                           </div>
@@ -846,56 +896,94 @@ const Landing2 = () => {
                         />
                         <div className="px-10 py-8 bg-white/10 backdrop-blur-6xl ring-1 ring-black/5 shadow-xl rounded-lg  container justify-center items-center mx-auto  mt-10">
                           <h1 className="text-black text-center text-3xl md:text-5xl tracking-tight font-bold">
-                            Acerca del Ministerio
+                            Ministerio <br /> Rodolfo Arias
                           </h1>
                           <h3 className="text-black text-sm tracking-tight font-light mt-4 text-center  ">
-                            "Neque porro quisquam est qui dolorem ipsum quia
-                            dolor sit amet, consectetur, adipisci velit..."
+                            "Confía en el Señor de todo corazón y no te apoyes
+                            en tu propia inteligencia. Reconócelo en todos tus
+                            caminos y él enderezará tus sendas."
                           </h3>
                           <p className="text-black text-sm tracking-tight font-light  mt-4 text-justify w-full md:w-10/12 mx-auto  ">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Morbi augue nibh, laoreet vel lacus lacinia,
-                            faucibus consectetur libero. In finibus magna eu
-                            convallis consectetur. Donec eget consectetur urna.
-                            Etiam feugiat sapien eu ligula blandit porttitor. In
-                            hac habitasse platea dictumst. Maecenas sed diam et
-                            ex sagittis consectetur et sit amet felis. Integer
-                            ultricies, eros a fermentum tristique, libero leo
-                            lacinia justo, eget molestie enim tortor non nulla.
-                            Nunc sed interdum est. Vestibulum ante ipsum primis
-                            in faucibus orci luctus et ultrices posuere cubilia
-                            curae; Maecenas erat mauris, tempor aliquet odio
-                            eget, facilisis pharetra ipsum. Morbi mattis
-                            interdum porta. Maecenas semper tincidunt ipsum, id
-                            hendrerit metus semper non. Suspendisse sed justo
-                            vitae augue pretium iaculis. Donec tempus ipsum nec
-                            nibh ultrices sagittis. Vestibulum congue eget velit
-                            a pharetra. Duis nec tempor ipsum, vitae vestibulum
-                            enim. Cras sem erat, placerat nec elit nec, sagittis
-                            faucibus tellus. <br /> <br />
-                            Maecenas ac tellus sed risus tristique volutpat.
-                            Nulla nec pellentesque velit. Integer massa nisi,
-                            malesuada in tellus et, rhoncus finibus enim. Nulla
-                            eget libero mauris. <br /> Mauris pellentesque,
-                            turpis vel vulputate pulvinar, lorem diam
-                            condimentum ex, vel posuere elit quam a nibh. Mauris
-                            commodo bibendum est nec scelerisque. Praesent
-                            dapibus rutrum tortor, eget molestie lacus lacinia
-                            dignissim. Phasellus dignissim erat id nisi peuam.
-                            In magna odio, aliquet et porta non, ornare a lorem.
-                            Nulla tincidunt justo ante, eu vehicula purus
-                            sodales sed. Quisque velit sem, rutrum sit amet
-                            velit sed, pellentesque accumsan tellus.elit.
+                            Rodolfo Arias es un joven costarricense apasionado
+                            por Dios, convencido de que la verdadera
+                            transformación de la vida comienza cuando el ser
+                            humano entrega su corazón completamente a Cristo. Su
+                            fe no es una tradición, es una convicción profunda:
+                            Dios es real, su amor es eterno, y su llamado es
+                            para todos. Rodolfo cree firmemente que Jesús es el
+                            camino, la verdad y la vida, y que sólo en Él hay
+                            salvación, restauración y propósito.
                             <br />
-                            <br /> Curabitur pulvinar dolor ac dolor dictum, sed
-                            dapibus ante dignissim. Nulla aliquet ligula eget
-                            porta volutpat. Curabitur vitae sagittis metus.
-                            Phasellus sem arcu, egestas mattis vulputate sed,
-                            fringilla in quam. In magna odio, aliquet et porta
-                            non, ornare a lorem. Nulla tincidunt justo ante, eu
-                            vehicula purus sodales sed. Quisque velit sem,
-                            rutrum sit amet velit sed, pellentesque accumsan
-                            tellus.
+                            <br />
+                            Desde temprana edad, su pasión por conocer a Dios lo
+                            llevó a sumergirse en la lectura constante de la
+                            Biblia y a desarrollar una sensibilidad especial
+                            para comunicar el mensaje del Evangelio de forma
+                            clara, directa y cercana. Hoy, a través de los
+                            medios digitales, Dios ha abierto puertas
+                            sorprendentes: sus mensajes diarios en TikTok y
+                            semanales en YouTube alcanzan millones de personas,
+                            llevando luz y esperanza a corazones que quizás
+                            nunca entrarían a un templo, pero que desde sus
+                            dispositivos reciben palabra de vida.{" "}
+                            <i>
+                              "Id, y haced discípulos a todas las naciones"
+                            </i>{" "}
+                            — Mateo 28:19.
+                            <br />
+                            <br />
+                            Además, forma parte del ministerio de{" "}
+                            <i>Pura Vida FM</i>, emisora cristiana con más de 8
+                            años al aire en Costa Rica (106.3 FM), desde donde
+                            miles de personas han sido edificadas a lo largo de
+                            los años, tanto en transmisiones como en eventos,
+                            conciertos y campañas de oración que han reunido a
+                            más de 200,000 personas. No se trata solo de una
+                            radio, sino de un movimiento de fe que sigue
+                            creciendo.
+                            <br />
+                            <br />
+                            Con el deseo de poner herramientas prácticas en
+                            manos de los creyentes, nace también{" "}
+                            <i>Gracia Plus</i>, una aplicación móvil disponible
+                            en Apple y Android, donde los usuarios pueden leer
+                            la Biblia, recibir versículos e imágenes diarias,
+                            oraciones, escuchar la radio en vivo e interactuar
+                            con distintos ministerios. Todo con un mismo
+                            propósito: que cada persona tenga acceso a la
+                            Palabra y pueda crecer espiritualmente, porque
+                            Rodolfo cree firmemente que la relación con Dios es
+                            personal, diaria y transformadora.
+                            <br />
+                            <br />
+                            Para Rodolfo, el amor es el fundamento del
+                            Evangelio. No importa el trasfondo, la denominación,
+                            o la historia personal de cada uno: Dios nos llama a
+                            amar sin condiciones, tal como Jesús lo hizo.{" "}
+                            <i>
+                              "En esto conocerán todos que sois mis discípulos,
+                              si tenéis amor los unos por los otros"
+                            </i>{" "}
+                            — Juan 13:35.
+                            <br />
+                            <br />
+                            Su llamado es claro: levantar una generación que
+                            conozca a Dios de verdad, no por religión, sino por
+                            experiencia; personas dispuestas a vivir para Cristo
+                            y reflejar su gloria. Porque como declara la
+                            Escritura:{" "}
+                            <i>
+                              "Porque yo sé los planes que tengo para vosotros,
+                              planes de bienestar y no de mal, para daros un
+                              futuro y una esperanza"
+                            </i>{" "}
+                            — Jeremías 29:11.
+                            <br />
+                            <br />
+                            Este es el corazón de Rodolfo Arias: predicar a
+                            Cristo, levantar discípulos, y llevar esperanza a
+                            todo lugar donde Dios abra una puerta. Y esto,
+                            apenas está comenzando.
                           </p>
                         </div>
                       </div>
@@ -911,8 +999,8 @@ const Landing2 = () => {
                           Galería del Ministerio
                         </h1>
                         <h3 className="text-black text-sm w-3/4 mx-auto tracking-tight  font-light mt-2 md:mt-4 text-center  ">
-                          Observe los mejores momentos del ministerio de Rodolfo
-                          Arias
+                          Disfrute de los mejores momentos del ministerio en la
+                          galería de fotos de Rodolfo Arias.
                         </h3>
                         <div
                           id="infinite-menu-container"
@@ -949,17 +1037,38 @@ const Landing2 = () => {
                             />
                             <div className="p-4">
                               <h2 className="text-black text-xl font-semibold text-left mb-2">
-                                Puravida FM
+                                Pura Vida FM
                               </h2>
                               <p className="text-black text-sm text-left mb-4">
-                                Estación de radio donde compartimos mensajes de
-                                fe y esperanza para toda la familia.
+                                Pura Vida FM 106.3 lleva más de 8 años al aire
+                                en Costa Rica, compartiendo mensajes de fe,
+                                esperanza y buena música para toda la familia.
+                                Estamos 24/7 acompañando a miles de personas,
+                                con actividades que reúnen a muchos en un mismo
+                                sentir. Más que una radio, somos una voz de
+                                bendición cada día.
                               </p>
                               <div className="flex justify-end gap-2">
-                                <button className="rounded-full flex items-center justify-center shadow-lg ring-1 ring-black/5 w-10 h-10 bg-white/50">
+                                <button
+                                  onClick={() =>
+                                    window.open(
+                                      "https://www.puravidafm.cr",
+                                      "_blank"
+                                    )
+                                  }
+                                  className="rounded-full flex items-center justify-center shadow-lg ring-1 ring-black/5 w-10 h-10 bg-white/50"
+                                >
                                   <BiGlobe className="text-black text-lg" />
                                 </button>
-                                <button className="rounded-full flex items-center justify-center shadow-lg ring-1 ring-black/5 w-10 h-10 bg-white/50">
+                                <button
+                                  onClick={() =>
+                                    window.open(
+                                      "https://www.facebook.com/PuraVida1063",
+                                      "_blank"
+                                    )
+                                  }
+                                  className="rounded-full flex items-center justify-center shadow-lg ring-1 ring-black/5 w-10 h-10 bg-white/50"
+                                >
                                   <BiLogoFacebookCircle className="text-black text-lg" />
                                 </button>
                               </div>
@@ -978,17 +1087,45 @@ const Landing2 = () => {
                                 Contenido Digital
                               </h2>
                               <p className="text-black text-sm text-left mb-4">
-                                Mensajes motivacionales y de fe a través de
-                                redes sociales y plataformas digitales.
+                                Llevamos el mensaje de fe a cada plataforma.
+                                Creamos TikToks con millones de vistas, podcasts
+                                en Spotify, transmisiones en vivo por Facebook,
+                                TikTok y YouTube. Con videos cortos y mensajes
+                                completos buscamos inspirar, edificar y acercar
+                                más personas a Dios cada día.
                               </p>
                               <div className="flex justify-end gap-2">
-                                <button className="rounded-full flex items-center justify-center shadow-lg ring-1 ring-black/5 w-10 h-10 bg-white/50">
+                                <button
+                                  onClick={() =>
+                                    window.open(
+                                      "https://www.youtube.com/@RodolfoArias77",
+                                      "_blank"
+                                    )
+                                  }
+                                  className="rounded-full flex items-center justify-center shadow-lg ring-1 ring-black/5 w-10 h-10 bg-white/50"
+                                >
                                   <BiLogoYoutube className="text-black text-lg" />
                                 </button>
-                                <button className="rounded-full flex items-center justify-center shadow-lg ring-1 ring-black/5 w-10 h-10 bg-white/50">
+                                <button
+                                  onClick={() =>
+                                    window.open(
+                                      "https://www.facebook.com/RodolfoAriasMinistry",
+                                      "_blank"
+                                    )
+                                  }
+                                  className="rounded-full flex items-center justify-center shadow-lg ring-1 ring-black/5 w-10 h-10 bg-white/50"
+                                >
                                   <BiLogoFacebookCircle className="text-black text-lg" />
                                 </button>
-                                <button className="rounded-full flex items-center justify-center shadow-lg ring-1 ring-black/5 w-10 h-10 bg-white/50">
+                                <button
+                                  onClick={() =>
+                                    window.open(
+                                      "https://www.tiktok.com/@rodolfoarias77",
+                                      "_blank"
+                                    )
+                                  }
+                                  className="rounded-full flex items-center justify-center shadow-lg ring-1 ring-black/5 w-10 h-10 bg-white/50"
+                                >
                                   <BiLogoTiktok className="text-black text-lg" />
                                 </button>
                               </div>
@@ -1007,18 +1144,124 @@ const Landing2 = () => {
                                 Gracia Plus
                               </h2>
                               <p className="text-black text-sm text-left mb-4">
-                                Aplicación móvil con contenido cristiano,
-                                mensajes y recursos para el crecimiento
-                                espiritual.
+                                Rodolfo Arias es un joven costarricense
+                                apasionado por Dios, convencido de que la
+                                verdadera transformación de la vida comienza
+                                cuando el ser humano entrega su corazón
+                                completamente a Cristo. Su fe no es una
+                                tradición, es una convicción profunda: Dios es
+                                real, su amor es eterno, y su llamado es para
+                                todos. Rodolfo cree firmemente que Jesús es el
+                                camino, la verdad y la vida, y que sólo en Él
+                                hay salvación, restauración y propósito.
+                                <br />
+                                <br />
+                                Desde temprana edad, su pasión por conocer a
+                                Dios lo llevó a sumergirse en la lectura
+                                constante de la Biblia y a desarrollar una
+                                sensibilidad especial para comunicar el mensaje
+                                del Evangelio de forma clara, directa y cercana.
+                                Hoy, a través de los medios digitales, Dios ha
+                                abierto puertas sorprendentes: sus mensajes
+                                diarios en TikTok y semanales en YouTube
+                                alcanzan millones de personas, llevando luz y
+                                esperanza a corazones que quizás nunca entrarían
+                                a un templo, pero que desde sus dispositivos
+                                reciben palabra de vida.{" "}
+                                <i>
+                                  "Id, y haced discípulos a todas las naciones"
+                                </i>{" "}
+                                — Mateo 28:19.
+                                <br />
+                                <br />
+                                Además, forma parte del ministerio de{" "}
+                                <i>Pura Vida FM</i>, emisora cristiana con más
+                                de 8 años al aire en Costa Rica (106.3 FM),
+                                desde donde miles de personas han sido
+                                edificadas a lo largo de los años, tanto en
+                                transmisiones como en eventos, conciertos y
+                                campañas de oración que han reunido a más de
+                                200,000 personas. No se trata solo de una radio,
+                                sino de un movimiento de fe que sigue creciendo.
+                                <br />
+                                <br />
+                                Con el deseo de poner herramientas prácticas en
+                                manos de los creyentes, nace también{" "}
+                                <i>Gracia Plus</i>, una aplicación móvil
+                                disponible en Apple y Android, donde los
+                                usuarios pueden leer la Biblia, recibir
+                                versículos e imágenes diarias, oraciones,
+                                escuchar la radio en vivo e interactuar con
+                                distintos ministerios. Todo con un mismo
+                                propósito: que cada persona tenga acceso a la
+                                Palabra y pueda crecer espiritualmente, porque
+                                Rodolfo cree firmemente que la relación con Dios
+                                es personal, diaria y transformadora.
+                                <br />
+                                <br />
+                                Para Rodolfo, el amor es el fundamento del
+                                Evangelio. No importa el trasfondo, la
+                                denominación, o la historia personal de cada
+                                uno: Dios nos llama a amar sin condiciones, tal
+                                como Jesús lo hizo.{" "}
+                                <i>
+                                  "En esto conocerán todos que sois mis
+                                  discípulos, si tenéis amor los unos por los
+                                  otros"
+                                </i>{" "}
+                                — Juan 13:35.
+                                <br />
+                                <br />
+                                Su llamado es claro: levantar una generación que
+                                conozca a Dios de verdad, no por religión, sino
+                                por experiencia; personas dispuestas a vivir
+                                para Cristo y reflejar su gloria. Porque como
+                                declara la Escritura:{" "}
+                                <i>
+                                  "Porque yo sé los planes que tengo para
+                                  vosotros, planes de bienestar y no de mal,
+                                  para daros un futuro y una esperanza"
+                                </i>{" "}
+                                — Jeremías 29:11.
+                                <br />
+                                <br />
+                                Este es el corazón de Rodolfo Arias: predicar a
+                                Cristo, levantar discípulos, y llevar esperanza
+                                a todo lugar donde Dios abra una puerta. Y esto,
+                                apenas está comenzando.
                               </p>
                               <div className="flex justify-end gap-2">
-                                <button className="rounded-full flex items-center justify-center shadow-lg ring-1 ring-black/5 w-10 h-10 bg-white/50">
+                                <button
+                                  onClick={() =>
+                                    window.open(
+                                      "https://graciaplus.com",
+                                      "_blank"
+                                    )
+                                  }
+                                  className="rounded-full flex items-center justify-center shadow-lg ring-1 ring-black/5 w-10 h-10 bg-white/50"
+                                >
                                   <BiGlobe className="text-black text-lg" />
                                 </button>
-                                <button className="rounded-full flex items-center justify-center shadow-lg ring-1 ring-black/5 w-10 h-10 bg-white/50">
+                                <button
+                                  onClick={() =>
+                                    window.open(
+                                      "https://play.google.com/store/apps/details?id=com.lobster.graciaplus&hl=es_CR",
+                                      "_blank"
+                                    )
+                                  }
+                                  className="rounded-full flex items-center justify-center shadow-lg ring-1 ring-black/5 w-10 h-10 bg-white/50"
+                                >
                                   <BiLogoAndroid className="text-black text-lg" />
                                 </button>
-                                <button className="rounded-full flex items-center justify-center shadow-lg ring-1 ring-black/5 w-10 h-10 bg-white/50">
+                                <button
+                                  onClick={() =>
+                                    window.open(
+                                      "https://apps.apple.com/cr/app/gracia-plus/id6742936528?l=es-GB",
+                                      "_blank"
+                                    )
+                                  }
+                                  className="rounded-full flex items-center justify-center shadow-lg ring-1 ring-black/5 w-10 h-10 bg-white/50"
+                                >
                                   <BiLogoApple className="text-black text-lg" />
                                 </button>
                               </div>
@@ -1037,7 +1280,9 @@ const Landing2 = () => {
                         Otros recursos
                       </h1>
                       <h3 className="text-black mb-16 text-sm w-3/4 mx-auto tracking-tight  font-light mt-2 md:mt-4 text-center  ">
-                        "Manos que dan nunca estarán vacías"
+                        Con tus donaciones, puedes apoyar nuestro ministerio a
+                        seguir creciendo y expandir el mensaje de Dios a todo el
+                        mundo.
                       </h3>
                       <div className="z-10 container mx-auto px-6 flex flex-col gap-8">
                         {/* Donations Section */}
@@ -1052,7 +1297,7 @@ const Landing2 = () => {
                                 className="w-10 h-10 rounded-full hover:scale-110 transition-all duration-300 hover:cursor-pointer items-center justify-center flex bg-black "
                                 onClick={() =>
                                   window.open(
-                                    "https://www.paypal.com/donate/?hosted_button_id=2242222222222222222222222222222222222222",
+                                    "https://www.paypal.com/paypalme/ofrendayaenlinea",
                                     "_blank"
                                   )
                                 }
@@ -1061,9 +1306,8 @@ const Landing2 = () => {
                               </button>
                             </h1>
                             <span className="text-black text-sm tracking-tight font-light mt-2 text-left">
-                              Puedes apoyar nuestro ministerio con una donación.
-                              Con tu apoyo la palabra de Dios se puede escuchar
-                              en todo el mundo.
+                              Puede apoyar nuestro ministerio a seguir creciendo
+                              e inspirar a muchas más personas a conocer a Dios.
                             </span>
                           </div>
                         </div>
@@ -1079,9 +1323,8 @@ const Landing2 = () => {
                               <button
                                 className="w-10 h-10 rounded-full hover:scale-110 transition-all duration-300 hover:cursor-pointer items-center justify-center flex bg-black "
                                 onClick={() =>
-                                  window.open(
-                                    "mailto:contact@rodolfoarias.com",
-                                    "_blank"
+                                  alert(
+                                    "Puedes escribirnos al correo rodolfoarias77@gmail.com"
                                   )
                                 }
                               >
@@ -1099,7 +1342,7 @@ const Landing2 = () => {
                       <div className="flex flex-col  flex-1 items-center justify-center">
                         <img
                           src={ImageLobster}
-                          className="h-8 w-auto object-contain absolute left-4 bottom-25"
+                          className="h-8 w-auto object-contain absolute left-4 bottom-15"
                         />
                       </div>
                     </div>
@@ -1204,7 +1447,13 @@ const Landing2 = () => {
         </div>
 
         {/* Rodolfo Arias Badge - Center (Mobile) */}
-        <div className="xl:hidden fixed top-3 left-1/2 transform -translate-x-1/2 z-110">
+        <div
+          className={`${
+            currentMobileSection == "section1"
+              ? "hidden"
+              : "block xl:hidden fixed top-3 left-1/2 transform -translate-x-1/2 z-110"
+          }`}
+        >
           <h1 className="text-base sm:text-lg h-12 px-4 flex items-center bg-white/90 shadow-sm rounded-full font-bold">
             Rodolfo Arias
           </h1>

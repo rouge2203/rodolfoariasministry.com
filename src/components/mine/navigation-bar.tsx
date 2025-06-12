@@ -143,7 +143,9 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               ? "text-black cursor-pointer hover:text-black/65"
               : "text-black cursor-pointer hover:text-black/65"
           }`}
-          onClick={() => scrollToSection("section6")}
+          onClick={() =>
+            alert("Puedes escribirnos al correo rodolfoarias77@gmail.com")
+          }
         />
       </div>
     </nav>

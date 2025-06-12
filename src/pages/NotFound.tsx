@@ -1,47 +1,50 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { AuroraBackground } from "../components/aceternity/aurora-background";
 
 const NotFound: React.FC = () => {
   return (
-    <div className="min-h-screen bg-white flex flex-col justify-center items-center px-4">
-      <div className="max-w-md text-center">
-        <div className="text-6xl font-bold text-indigo-600 mb-4">404</div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">
-          Page not found
-        </h1>
-        <p className="text-lg text-gray-500 mb-8">
-          Sorry, we couldn't find the page you're looking for. The page may have
-          been moved or doesn't exist.
-        </p>
-        <div className="space-y-4">
-          <Link
-            to="/"
-            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            ← Go back home
-          </Link>
-          <div className="text-sm text-gray-400">
-            or{" "}
+    <AuroraBackground className="0">
+      <div className="min-h-screen flex flex-col justify-center items-center px-4 relative z-10">
+        <div className="max-w-md text-center relative z-20">
+          <div className="text-6xl font-bold text-black mb-4">404</div>
+          <h1 className="text-3xl font-bold text-black mb-4">
+            Página no encontrada
+          </h1>
+          <p className="text-lg text-black/70 mb-8">
+            Lo sentimos, no pudimos encontrar la página que buscas. Es posible
+            que la página haya sido movida o no exista.
+          </p>
+          <div className="space-y-4 relative z-30">
             <Link
-              to="/contact"
-              className="text-indigo-600 hover:text-indigo-500"
+              to="/"
+              className="relative z-40 cursor-pointer inline-flex items-center px-6 py-3 border border-black text-base font-medium rounded-md text-white bg-black hover:bg-black/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black/50 transition-all duration-200"
             >
-              contact us
-            </Link>{" "}
-            if you need help
+              ← Volver al inicio
+            </Link>
+            <div className="text-sm text-black/60 relative z-40">
+              o{" "}
+              <Link
+                to="/?section=section6"
+                className="text-black hover:text-black/70 font-medium cursor-pointer relative z-40"
+              >
+                contáctanos
+              </Link>{" "}
+              si necesitas ayuda
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="mt-16 text-center">
-        <div className="text-9xl opacity-10">🏠</div>
-        <p className="text-sm text-gray-400 mt-4">
-          "For I know the plans I have for you," declares the Lord, "plans to
-          prosper you and not to harm you, to give you hope and a future." -
-          Jeremiah 29:11
-        </p>
+        <div className="mt-16 text-center relative z-20">
+          <div className="text-9xl opacity-10">🏠</div>
+          <p className="text-sm text-black/60 mt-4 max-w-lg">
+            "Porque yo sé los pensamientos que tengo acerca de vosotros, dice
+            Jehová, pensamientos de paz, y no de mal, para daros el fin que
+            esperáis." - Jeremías 29:11
+          </p>
+        </div>
       </div>
-    </div>
+    </AuroraBackground>
   );
 };
 
