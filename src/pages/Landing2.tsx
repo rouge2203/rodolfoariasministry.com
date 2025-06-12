@@ -563,7 +563,7 @@ const Landing2 = () => {
               >
                 <div className="px-4 flex row h-120 md:h-130 md:px-20 w-full relative mx-auto gap-4 ">
                   {/* Pura Vida FM */}
-                  <div className="bg-white/1 relative px-0  backdrop-blur-6xl ring-1 ring-black/5 shadow-xl rounded-lg w-full h-full">
+                  <div className="bg-white/1  hover:scale-102 transition-all duration-300 relative px-0  backdrop-blur-6xl ring-1 ring-black/5 shadow-xl rounded-lg w-full h-full">
                     <img
                       src={ImagePuravida}
                       alt="Puravida"
@@ -606,7 +606,7 @@ const Landing2 = () => {
                     </div>
                   </div>
                   {/* Tiktok */}
-                  <div className="bg-white/1 relative px-0  backdrop-blur-6xl ring-1 ring-black/5 shadow-xl rounded-lg w-full h-full">
+                  <div className="bg-white/1 hover:scale-102 transition-all duration-300 relative px-0  backdrop-blur-6xl ring-1 ring-black/5 shadow-xl rounded-lg w-full h-full">
                     <img
                       src={ImageTiktok}
                       alt="Puravida"
@@ -663,7 +663,7 @@ const Landing2 = () => {
                     </div>
                   </div>
                   {/* Graciaplus */}
-                  <div className="bg-white/1 relative px-0  backdrop-blur-6xl ring-1 ring-black/5 shadow-xl rounded-lg w-full h-full">
+                  <div className="bg-white/1 hover:scale-102 transition-all duration-300 relative px-0  backdrop-blur-6xl ring-1 ring-black/5 shadow-xl rounded-lg w-full h-full">
                     <img
                       src={ImageGraciaPlus}
                       alt="Puravida"
@@ -1144,91 +1144,13 @@ const Landing2 = () => {
                                 Gracia Plus
                               </h2>
                               <p className="text-black text-sm text-left mb-4">
-                                Rodolfo Arias es un joven costarricense
-                                apasionado por Dios, convencido de que la
-                                verdadera transformación de la vida comienza
-                                cuando el ser humano entrega su corazón
-                                completamente a Cristo. Su fe no es una
-                                tradición, es una convicción profunda: Dios es
-                                real, su amor es eterno, y su llamado es para
-                                todos. Rodolfo cree firmemente que Jesús es el
-                                camino, la verdad y la vida, y que sólo en Él
-                                hay salvación, restauración y propósito.
-                                <br />
-                                <br />
-                                Desde temprana edad, su pasión por conocer a
-                                Dios lo llevó a sumergirse en la lectura
-                                constante de la Biblia y a desarrollar una
-                                sensibilidad especial para comunicar el mensaje
-                                del Evangelio de forma clara, directa y cercana.
-                                Hoy, a través de los medios digitales, Dios ha
-                                abierto puertas sorprendentes: sus mensajes
-                                diarios en TikTok y semanales en YouTube
-                                alcanzan millones de personas, llevando luz y
-                                esperanza a corazones que quizás nunca entrarían
-                                a un templo, pero que desde sus dispositivos
-                                reciben palabra de vida.{" "}
-                                <i>
-                                  "Id, y haced discípulos a todas las naciones"
-                                </i>{" "}
-                                — Mateo 28:19.
-                                <br />
-                                <br />
-                                Además, forma parte del ministerio de{" "}
-                                <i>Pura Vida FM</i>, emisora cristiana con más
-                                de 8 años al aire en Costa Rica (106.3 FM),
-                                desde donde miles de personas han sido
-                                edificadas a lo largo de los años, tanto en
-                                transmisiones como en eventos, conciertos y
-                                campañas de oración que han reunido a más de
-                                200,000 personas. No se trata solo de una radio,
-                                sino de un movimiento de fe que sigue creciendo.
-                                <br />
-                                <br />
-                                Con el deseo de poner herramientas prácticas en
-                                manos de los creyentes, nace también{" "}
-                                <i>Gracia Plus</i>, una aplicación móvil
-                                disponible en Apple y Android, donde los
-                                usuarios pueden leer la Biblia, recibir
-                                versículos e imágenes diarias, oraciones,
-                                escuchar la radio en vivo e interactuar con
-                                distintos ministerios. Todo con un mismo
-                                propósito: que cada persona tenga acceso a la
-                                Palabra y pueda crecer espiritualmente, porque
-                                Rodolfo cree firmemente que la relación con Dios
-                                es personal, diaria y transformadora.
-                                <br />
-                                <br />
-                                Para Rodolfo, el amor es el fundamento del
-                                Evangelio. No importa el trasfondo, la
-                                denominación, o la historia personal de cada
-                                uno: Dios nos llama a amar sin condiciones, tal
-                                como Jesús lo hizo.{" "}
-                                <i>
-                                  "En esto conocerán todos que sois mis
-                                  discípulos, si tenéis amor los unos por los
-                                  otros"
-                                </i>{" "}
-                                — Juan 13:35.
-                                <br />
-                                <br />
-                                Su llamado es claro: levantar una generación que
-                                conozca a Dios de verdad, no por religión, sino
-                                por experiencia; personas dispuestas a vivir
-                                para Cristo y reflejar su gloria. Porque como
-                                declara la Escritura:{" "}
-                                <i>
-                                  "Porque yo sé los planes que tengo para
-                                  vosotros, planes de bienestar y no de mal,
-                                  para daros un futuro y una esperanza"
-                                </i>{" "}
-                                — Jeremías 29:11.
-                                <br />
-                                <br />
-                                Este es el corazón de Rodolfo Arias: predicar a
-                                Cristo, levantar discípulos, y llevar esperanza
-                                a todo lugar donde Dios abra una puerta. Y esto,
-                                apenas está comenzando.
+                                Gracia Plus es una aplicación móvil que permite
+                                leer la Biblia, recibir versículos e imágenes
+                                diarias, oraciones, escuchar la radio en vivo e
+                                interactuar con distintos ministerios. Todo con
+                                un mismo propósito: que cada persona tenga
+                                acceso a la Palabra y pueda crecer
+                                espiritualmente.
                               </p>
                               <div className="flex justify-end gap-2">
                                 <button
