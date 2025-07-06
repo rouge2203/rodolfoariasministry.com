@@ -11,6 +11,18 @@ import Folder from "../components/reactbits/folder";
 import Dock from "../components/reactbits/dock";
 import InfiniteMenu from "../components/reactbits/infinite-menu";
 import { MdOutlineEmail, MdMenu, MdClose } from "react-icons/md";
+import { supabase } from "../lib/supabase";
+
+interface ImageData {
+  url: string;
+}
+
+interface VideoData {
+  link: string;
+  title: string;
+  description: string;
+}
+
 import {
   BiSolidBible,
   BiSolidHome,
@@ -48,6 +60,34 @@ const Landing2 = () => {
   const [currentMobileSection, setCurrentMobileSection] = useState<
     "section1" | "section2" | "section3" | "section4" | "section5" | "section6"
   >("section1");
+  const [galleryImages, setGalleryImages] = useState<ImageData[]>([]);
+  const [videoData, setVideoData] = useState<VideoData[]>([]);
+  const [latestVideo, setLatestVideo] = useState<VideoData | null>(null);
+
+  // Helper function to convert YouTube URLs to embed format
+  const getEmbedUrl = (url: string) => {
+    if (!url) return "";
+
+    // If it's already an embed URL, return as is
+    if (url.includes("/embed/")) {
+      return url;
+    }
+
+    // Convert watch URL to embed URL
+    if (url.includes("watch?v=")) {
+      const videoId = url.split("watch?v=")[1]?.split("&")[0];
+      return `https://www.youtube.com/embed/${videoId}`;
+    }
+
+    // Convert youtu.be URL to embed URL
+    if (url.includes("youtu.be/")) {
+      const videoId = url.split("youtu.be/")[1]?.split("?")[0];
+      return `https://www.youtube.com/embed/${videoId}`;
+    }
+
+    // Return original URL if no conversion needed
+    return url;
+  };
 
   // Handle URL search params for direct section navigation
   useEffect(() => {
@@ -74,6 +114,63 @@ const Landing2 = () => {
         }, 100);
       }
     }
+  }, []);
+
+  // Fetch gallery images from Supabase
+  useEffect(() => {
+    const fetchGalleryImages = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("image")
+          .select("url")
+          .eq("type", "rodolfo-bio");
+
+        if (error) {
+          console.error("Error fetching gallery images:", error);
+          return;
+        }
+
+        if (data) {
+          setGalleryImages(data);
+        }
+      } catch (error) {
+        console.error("Error fetching gallery images:", error);
+      }
+    };
+
+    fetchGalleryImages();
+  }, []);
+
+  // Fetch video data from Supabase
+  useEffect(() => {
+    const fetchVideoData = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("video")
+          .select("link, title, description")
+          .eq("type", "rodolfo-bio")
+          .order("created_at", { ascending: false })
+          .limit(7);
+
+        if (error) {
+          console.error("Error fetching video data:", error);
+          return;
+        }
+
+        if (data && data.length > 0) {
+          // Set the latest video (first record)
+          setLatestVideo(data[0]);
+
+          // Set the remaining 6 videos for videoEmbeds
+          const remainingVideos = data.slice(1, 7);
+          setVideoData(remainingVideos);
+        }
+      } catch (error) {
+        console.error("Error fetching video data:", error);
+      }
+    };
+
+    fetchVideoData();
   }, []);
 
   //Classname for dock items
@@ -180,65 +277,78 @@ const Landing2 = () => {
     },
   ];
 
-  const videoEmbeds1 = [
-    "https://www.youtube.com/embed/ePxS7VW1eGc",
-    "https://www.youtube.com/embed/ipym7qWmhck",
-    "https://www.youtube.com/embed/Qvjv53w6Qe4", //CENTER
+  // Create video embeds from fetched data
+  const videoEmbeds1 =
+    videoData.length > 0
+      ? videoData.slice(0, 3).map((video) => getEmbedUrl(video.link))
+      : [
+          "https://www.youtube.com/embed/ePxS7VW1eGc",
+          "https://www.youtube.com/embed/ipym7qWmhck",
+          "https://www.youtube.com/embed/Qvjv53w6Qe4", //CENTER
+        ];
 
-    // …etc
-  ];
-  const videoEmbeds2 = [
-    "https://www.youtube.com/embed/1yJIxiv_bcM",
-    "https://www.youtube.com/embed/f-5XlB7EusQ",
-    "https://www.youtube.com/embed/J59K9i3vxIU", //CENTER
+  const videoEmbeds2 =
+    videoData.length > 3
+      ? videoData.slice(3, 6).map((video) => getEmbedUrl(video.link))
+      : [
+          "https://www.youtube.com/embed/1yJIxiv_bcM",
+          "https://www.youtube.com/embed/f-5XlB7EusQ",
+          "https://www.youtube.com/embed/J59K9i3vxIU", //CENTER
+        ];
 
-    // …etc
-  ];
-
-  const infiniteMenuItems = [
-    {
-      image:
-        "https://mafisa-group-assets.nyc3.cdn.digitaloceanspaces.com/puravidafm/fofo&mike.jpg",
-      link: "https://www.facebook.com/RodolfoAriasMinistry",
-      title: "",
-      description: "",
-    },
-    {
-      image:
-        "https://mafisa-group-assets.nyc3.cdn.digitaloceanspaces.com/puravidafm/fofo&mike.jpg",
-      link: "https://www.facebook.com/RodolfoAriasMinistry",
-      title: "",
-      description: "",
-    },
-    {
-      image:
-        "https://mafisa-group-assets.nyc3.cdn.digitaloceanspaces.com/puravidafm/fofo&rastas.jpg",
-      link: "https://www.facebook.com/RodolfoAriasMinistryhttps://google.com/",
-      title: "Item 3",
-      description: "",
-    },
-    {
-      image:
-        "https://mafisa-group-assets.nyc3.cdn.digitaloceanspaces.com/puravidafm/fofo_cabina.jpg",
-      link: "https://www.facebook.com/RodolfoAriasMinistry",
-      title: "",
-      description: "",
-    },
-    {
-      image:
-        "https://mafisa-group-assets.nyc3.cdn.digitaloceanspaces.com/puravidafm/fofo_grupal.jpg",
-      link: "https://www.facebook.com/RodolfoAriasMinistry",
-      title: "",
-      description: "",
-    },
-    {
-      image:
-        "https://mafisa-group-assets.nyc3.cdn.digitaloceanspaces.com/puravidafm/rodolfo&gorra.png",
-      link: "https://www.facebook.com/RodolfoAriasMinistry",
-      title: "",
-      description: "",
-    },
-  ];
+  // Create infiniteMenuItems from fetched gallery images
+  const infiniteMenuItems =
+    galleryImages.length > 0
+      ? galleryImages.map((image, index) => ({
+          image: image.url,
+          link: "https://www.facebook.com/RodolfoAriasMinistry",
+          title: "",
+          description: "",
+        }))
+      : [
+          {
+            image:
+              "https://mafisa-group-assets.nyc3.cdn.digitaloceanspaces.com/puravidafm/fofo&mike.jpg",
+            link: "https://www.facebook.com/RodolfoAriasMinistry",
+            title: "",
+            description: "",
+          },
+          {
+            image:
+              "https://mafisa-group-assets.nyc3.cdn.digitaloceanspaces.com/puravidafm/fofo&mike.jpg",
+            link: "https://www.facebook.com/RodolfoAriasMinistry",
+            title: "",
+            description: "",
+          },
+          {
+            image:
+              "https://mafisa-group-assets.nyc3.cdn.digitaloceanspaces.com/puravidafm/fofo&rastas.jpg",
+            link: "https://www.facebook.com/RodolfoAriasMinistryhttps://google.com/",
+            title: "Item 3",
+            description: "",
+          },
+          {
+            image:
+              "https://mafisa-group-assets.nyc3.cdn.digitaloceanspaces.com/puravidafm/fofo_cabina.jpg",
+            link: "https://www.facebook.com/RodolfoAriasMinistry",
+            title: "",
+            description: "",
+          },
+          {
+            image:
+              "https://mafisa-group-assets.nyc3.cdn.digitaloceanspaces.com/puravidafm/fofo_grupal.jpg",
+            link: "https://www.facebook.com/RodolfoAriasMinistry",
+            title: "",
+            description: "",
+          },
+          {
+            image:
+              "https://mafisa-group-assets.nyc3.cdn.digitaloceanspaces.com/puravidafm/rodolfo&gorra.png",
+            link: "https://www.facebook.com/RodolfoAriasMinistry",
+            title: "",
+            description: "",
+          },
+        ];
 
   const tabs = [
     { id: "section1", title: "Inicio" },
@@ -399,20 +509,21 @@ const Landing2 = () => {
               <div className="mt-16 w-full flex">
                 <div className="flex flex-col w-1/2 flex-1 px-6 md:py-10 ">
                   <iframe
-                    src="https://www.youtube.com/embed/hafl3je4T7c"
+                    src={
+                      getEmbedUrl(latestVideo?.link || "") ||
+                      "https://www.youtube.com/embed/hafl3je4T7c"
+                    }
                     className="md:hidden w-full h-full rounded-lg aspect-video mb-10 md:mb-0"
                   ></iframe>
                   <h1 className="text-black text-sm md:text-lg tracking-tight font-medium text-start">
                     Mi último mensaje
                   </h1>
                   <h1 className="text-black text-3xl md:text-5xl tracking-tight font-bold text-start">
-                    Dios te bendiga en tu peor momento
+                    {latestVideo?.title || "Dios te bendiga en tu peor momento"}
                   </h1>
                   <p className="text-black text-sm tracking-tight font-light mt-4 text-start w-10/12  ">
-                    En los peores momentos, Dios prepara sus mayores victorias.
-                    Como David en el Salmo 34, podemos levantar adoración en
-                    medio de la prueba, sabiendo que lo mejor está por venir.
-                    ¡No te rindas, la promesa sigue en pie!
+                    {latestVideo?.description ||
+                      "En los peores momentos, Dios prepara sus mayores victorias. Como David en el Salmo 34, podemos levantar adoración en medio de la prueba, sabiendo que lo mejor está por venir. ¡No te rindas, la promesa sigue en pie!"}
                   </p>
                   <div className="bg-transparent py-10  rounded-lg flex space-x-4 ">
                     <Folder size={1} color="#1e202e" items={videoEmbeds1} />
@@ -420,7 +531,10 @@ const Landing2 = () => {
                   </div>
                 </div>
                 <iframe
-                  src="https://www.youtube.com/embed/hafl3je4T7c"
+                  src={
+                    getEmbedUrl(latestVideo?.link || "") ||
+                    "https://www.youtube.com/embed/hafl3je4T7c"
+                  }
                   className="hidden md:block w-1/2 h-full rounded-lg aspect-video"
                 ></iframe>
               </div>
@@ -538,7 +652,7 @@ const Landing2 = () => {
                 id="infinite-menu-container"
                 className="  flex-1  flex mt-10 "
               >
-                <div className="px-4 h-120 md:h-130 md:px-20 relative mx-auto ">
+                <div className="px-4 w-full h-130 xl:h-150 md:px-20 relative mx-auto ">
                   <InfiniteMenu items={infiniteMenuItems} />
                 </div>
               </div>
@@ -846,21 +960,22 @@ const Landing2 = () => {
                         <div className="mt-16 w-full flex">
                           <div className="flex flex-col w-1/2 flex-1 px-6 md:py-10 ">
                             <iframe
-                              src="https://www.youtube.com/embed/hafl3je4T7c"
+                              src={
+                                getEmbedUrl(latestVideo?.link || "") ||
+                                "https://www.youtube.com/embed/hafl3je4T7c"
+                              }
                               className="md:hidden w-full h-full rounded-lg aspect-video mb-10 md:mb-0"
                             ></iframe>
                             <h1 className="text-black text-sm md:text-lg tracking-tight font-medium text-start">
                               Mi último mensaje
                             </h1>
                             <h1 className="text-black text-3xl md:text-5xl tracking-tight font-bold text-start">
-                              Dios te bendiga en tu peor momento
+                              {latestVideo?.title ||
+                                "Dios te bendiga en tu peor momento"}
                             </h1>
                             <p className="text-black text-sm tracking-tight font-light mt-4 text-start w-10/12  ">
-                              En los peores momentos, Dios prepara sus mayores
-                              victorias. Como David en el Salmo 34, podemos
-                              levantar adoración en medio de la prueba, sabiendo
-                              que lo mejor está por venir. ¡No te rindas, la
-                              promesa sigue en pie!
+                              {latestVideo?.description ||
+                                "En los peores momentos, Dios prepara sus mayores victorias. Como David en el Salmo 34, podemos levantar adoración en medio de la prueba, sabiendo que lo mejor está por venir. ¡No te rindas, la promesa sigue en pie!"}
                             </p>
                             <div className="bg-transparent py-10  rounded-lg flex space-x-4 ">
                               <Folder
@@ -876,7 +991,10 @@ const Landing2 = () => {
                             </div>
                           </div>
                           <iframe
-                            src="https://www.youtube.com/embed/hafl3je4T7c"
+                            src={
+                              getEmbedUrl(latestVideo?.link || "") ||
+                              "https://www.youtube.com/embed/hafl3je4T7c"
+                            }
                             className="hidden md:block w-1/2 h-full rounded-lg aspect-video"
                           ></iframe>
                         </div>
@@ -1006,7 +1124,7 @@ const Landing2 = () => {
                           id="infinite-menu-container"
                           className="  flex-1  mt-10  flex"
                         >
-                          <div className="px-4 h-120  md:h-130 md:px-20 relative mx-auto ">
+                          <div className="px-4 h-120 w-full  md:h-130 md:px-20 relative mx-auto ">
                             <InfiniteMenu items={infiniteMenuItems} />
                           </div>
                         </div>
@@ -1033,7 +1151,7 @@ const Landing2 = () => {
                             <img
                               src={ImagePuravida}
                               alt="Puravida FM"
-                              className="w-full h-48 object-cover"
+                              className="w-full aspect-video object-fit"
                             />
                             <div className="p-4">
                               <h2 className="text-black text-xl font-semibold text-left mb-2">
@@ -1080,7 +1198,7 @@ const Landing2 = () => {
                             <img
                               src={ImageTiktok}
                               alt="TikTok Content"
-                              className="w-full h-48 object-cover"
+                              className="w-full aspect-video object-fit"
                             />
                             <div className="p-4">
                               <h2 className="text-black text-xl font-semibold text-left mb-2">
@@ -1137,7 +1255,7 @@ const Landing2 = () => {
                             <img
                               src={ImageGraciaPlus}
                               alt="Gracia Plus"
-                              className="w-full h-48 object-cover"
+                              className="w-full aspect-video object-fit"
                             />
                             <div className="p-4">
                               <h2 className="text-black text-xl font-semibold text-left mb-2">
