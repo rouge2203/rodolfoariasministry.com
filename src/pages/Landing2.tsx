@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { AuroraBackground } from "../components/aceternity/aurora-background";
-import ImageRodolfo3 from "../assets/rodolfo-2.png";
+import ImageRodolfo3 from "../assets/rodolfo10.webp";
 import ImagePaperPlane from "../assets/paper-planes.png";
 import ImageBoat from "../assets/paper-boat.png";
 import ImagePuravida from "../assets/puravidafm.png";
@@ -470,16 +470,17 @@ const Landing2 = () => {
       case "section1":
         return (
           <div
-            className={`pt-20 sm:pt-10 sm:pl-10 xl:pt-16 xl:pl-50 sm:flex-row  flex flex-col relative z-20 w-full  h-screen text-center `}
+            className={`pt-20 sm:pt-10  sm:pl-10 xl:pt-16 xl:pl-50 sm:flex-row  flex flex-col relative z-20 w- xl:w-screen  h-screen text-center `}
           >
-            <div className="sm:self-stretch  sm:w-5/12 sm:flex-col xl:self-stretch  xl:w-5/12 xl:flex-col ">
+            <div className="sm:self-stretch   sm:w-5/12 sm:flex-col xl:self-stretch  xl:w-5/12 xl:flex-col ">
               <div className=" flex flex-col  sm:mt-[25%]  px-6 sm:px-0    sm:justify-start sm:items-end items-center justify-center ">
                 <h1 className="text-3xl lg:text-6xl xl:text-7xl  text-center sm:text-left font-bold text-black mb-2  ">
                   Rodolfo Arias
-                  <p className="text-base lg:text-lg xl:text-xl sm:text-left sm:max-w-none text-center font-extralight tracking-tight text-black max-w-2xl">
-                    Predicador apasionado por la palabra de Dios con un mensaje{" "}
+                  <p className="text-base lg:text-lg xl:text-xl mt-4 sm:text-left sm:max-w-none text-center font-extralight tracking-tight text-black max-w-2xl">
+                    Predicador apasionado por la palabra <br /> de Dios con un
+                    mensaje de
                     <br className="hidden xl:block" />
-                    de fe, esperanza y motivación.
+                    fe, esperanza y motivación.
                   </p>
                   <div className="mx-auto sm:mx-0  w-2/8 sm:w-1/6 h-1 mt-5 bg-black rounded-md " />
                 </h1>
@@ -940,7 +941,7 @@ const Landing2 = () => {
                         <img
                           src={ImageRodolfo3}
                           alt="Rodolfo"
-                          className="w-full h-full object-contain"
+                          className="w-full h-full object-contain sm:object-cover md:object-contain"
                         />
                       </div>
                     </div>
